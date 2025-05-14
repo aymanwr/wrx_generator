@@ -1,0 +1,18 @@
+{% extends 'home.html' %} <!-- Étend le modèle de base 'home.html' -->
+
+{% block title %}WRX-Generator | QR Code{% endblock title %} <!-- Définit le titre de la page -->
+
+{% block content %} <!-- Début du bloc de contenu -->
+<body>
+    <section class="py-xxl-10 pb-10" id="home"> <!-- Section avec des classes de style et un ID -->
+        <h1>Your QR Code</h1> <!-- Titre de la section -->
+        <div class="mt-5"> <!-- Division avec une marge supérieure -->
+            <img src="data:image/{{ file_format }};base64,{{ base64_image }}" alt="QR Code"> <!-- Affiche l'image du QR code encodée en base64 -->
+        </div>
+        <div class="mt-5"> <!-- Division avec une marge supérieure -->
+            <a href="data:image/{{ file_format }};base64,{{ base64_image }}" download="qrcode.{{ file_format }}" class="btn btn-primary mt-3">Download QR Code</a> <!-- Lien pour télécharger le QR code -->
+        </div>
+    </section>
+</body>
+{% endblock content %} <!-- Fin du bloc de contenu -->
+

@@ -1,0 +1,128 @@
+{% extends 'home.html' %}
+{% block title %}WRX-Generator | Home{% endblock title %}
+{% load static %}
+{% block content %}
+<section class="py-xxl-10 pb-10" id="home">
+  <div class="bg-holder bg-size" style="background-image: url(''); background-position: top center; background-size: cover;"></div>
+  <!--/.bg-holder-->
+
+  <div class="container">
+      <div class="row align-items-center">
+          <div class="col-md-5 col-xl-6 col-xxl-7 order-0 order-md-1 text-end"><img class="pt-7 pt-md-0 w-100" src="{% static 'assets/img/illustrations/hero_img.png' %}" alt="hero-header" /></div>
+          <div class="col-md-75 col-xl-6 col-xxl-5 text-md-start text-center py-8">
+              <h1 class="fw-normal fs-6 fs-xxl-7">WRX-Generator</h1>
+              <h1 class="fw-bolder fs-6 fs-xxl-7 mb-2">Your One-Stop Solution</h1>
+              <p class="fs-1 mb-5">Generate secure passwords, shorten URLs, and create customized QR codes effortlessly.</p>
+              <a class="btn btn-primary me-2" href="#Services" role="button">Get Started <i class="fas fa-arrow-right ms-2"></i></a>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+
+      <!-- ============================================-->
+      <!-- <section> begin ============================-->
+      <section class="py-7" id="services" container-xl="container-xl">
+
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-5 text-center mb-3">
+              <h5 class="text-danger" id="Services">SERVICES</h5>
+              <h2>Our services for you</h2>
+            </div>
+          </div>
+          <div class="row h-100 justify-content-center">
+            <div class="col-md-4 pt-4 px-md-2 px-lg-3">
+              <div class="card h-100 px-lg-5 card-span">
+                <div class="card-body d-flex flex-column justify-content-around">
+                  <div class="text-center pt-5"><img class="img-fluid" src="{% static 'assets/img/icons/service-1.svg' %}" alt="..." />
+                    <h5 class="my-4">Password Generator</h5>
+                  </div>
+                  <p>Our Password Generator allows you to create secure, customized passwords effortlessly.</p>
+                  <ul class="list-unstyled">
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Customizable Length.</li>
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Include Uppercase Letters.</li>
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Include Lowercase Letters.</li>
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Include Digits.</li>
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Include Special Characters.</li>
+                  </ul>
+                  
+                  <div class="text-center my-5">
+                    <div class="d-grid">
+                      <a class="btn btn-outline-danger" href="{% url 'password_generator:index' %}">Visit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 pt-4 px-md-2 px-lg-3">
+              <div class="card h-100 px-lg-5 card-span">
+                <div class="card-body d-flex flex-column justify-content-around">
+                  <div class="text-center pt-5"><img class="img-fluid" src="{% static 'assets/img/icons/service-2.svg' %}" alt="..." />
+                    <h5 class="my-4">Link Shortener</h5>
+                  </div>
+                  <p>Our Link Shortener allows you to convert long URLs into shorter, more manageable links.</p>
+                  <ul class="list-unstyled">
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Easy to Use.</li>
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Generate Unique Short URLs.</li>
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Redirect to Original URLs.</li>
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Save and Retrieve Links.</li>
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Seamless Integration.</li>
+                  </ul>
+                  
+                  <div class="text-center my-5">
+                    <div class="d-grid">
+                      <a class="btn btn-outline-danger" href="{% url 'shortener:index' %}">Visit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 pt-4 px-md-2 px-lg-3">
+              <div class="card h-100 px-lg-5 card-span">
+                <div class="card-body d-flex flex-column justify-content-around">
+                  <div class="text-center pt-5"><img class="img-fluid" src="{% static 'assets/img/icons/service-3.svg' %}" alt="..." />
+                    <h5 class="my-4">QR Code Generator</h5>
+                  </div>
+                  <p>Our QR Code Generator allows you to create customized QR codes quickly and easily.</p>
+                  <ul class="list-unstyled">
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Generate QR Codes with Custom Data.</li>
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Choose from Various Style Options.</li>
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Customize QR Code Colors.</li>
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Download QR Codes in PNG Format.</li>
+                      <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Supports Transparency for Creative Usage.</li>
+                  </ul>                  
+                  <div class="text-center my-5">
+                    <div class="d-grid">
+                      <a class="btn btn-outline-danger" href="{% url 'qrcode_generator:index' %}">Visit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of .container-->
+
+      </section>
+      <!-- <section> close ============================-->
+      <!-- ============================================-->
+
+
+
+
+      <!-- ============================================-->
+      <!-- <section> begin ============================-->
+      <section class="pt-7 pb-0">
+
+        
+
+      </section>
+      <!-- <section> close ============================-->
+      <!-- ============================================-->
+      
+
+      {% endblock %}
+
+

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+
+
+    <title>{% block title %}WRX-Generator{% endblock %}</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+
+    {% load static %}
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/img/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/img/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/favicon/favicon-16x16.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon/favicon.ico' %}">
+    <link rel="manifest" href="{% static 'assets/img/favicon/site.webmanifest.json' %}">
+    <meta name="msapplication-TileImage" content="{% static 'assets/img/favicon/mstile-150x150.png' %}">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="{% static 'assets/css/theme.css' %}" rel="stylesheet" />
+
+  </head>
+
+
+  <body>
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+        <div class="container"><a class="navbar-brand" href="{% url 'newsletter_app:index' %}"><img src="{% static 'assets/img/gallery/WRX_logo.png' %}" height="55px" alt="logo" /></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+          <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+                <li class="nav-item px-2">
+                    <a class="nav-link" aria-current="page" href="{% url 'newsletter_app:index' %}">Home</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="{% url 'password_generator:index' %}">Password Generator</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="{% url 'shortener:index' %}">Link Shortener</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="{% url 'qrcode_generator:index' %}">QR Code Generator</a>
+                </li>
+            </ul>
+        </div>
+      </nav>
+      <div class="container mt-5">
+        {% block content %}
+        {% endblock %}
+      </div>
+
+        <section class="bg-1000">
+            <div class="container mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2 class="fw-bold text-white">Stay Updated with WRX-Generator</h2>
+                        <p class="text-300">Receive the latest news and updates about our services, features, and more.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <h5 class="text-primary mb-3">Subscribe to Our Newsletter</h5>
+                        {% load newsletter_tags %}
+                        {% show_subscription_form %}
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+        <!-- ============================================-->
+        <!-- <section> begin ============================-->
+        <section class="py-0 bg-1000">
+  
+          <div class="container">
+            <div class="row justify-content-md-between justify-content-evenly py-4">
+              <div class="col-12 col-sm-8 col-md-6 col-lg-auto text-center text-md-start">
+                <p class="fs--1 my-2 fw-bold text-200">All rights Reserved &copy; WRX-Generator, 2024</p>
+              </div>
+              <div class="col-12 col-sm-8 col-md-6">
+                <p class="fs--1 my-2 text-center text-md-end text-200"> Made with&nbsp;
+                  <svg class="bi bi-suit-heart-fill" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#F95C19" viewBox="0 0 16 16">
+                    <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"></path>
+                  </svg>&nbsp;by&nbsp;<a class="fw-bold text-primary" href="https://themewagon.com/" target="_blank">ThemeWagon </a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- end of .container-->
+        </div>
+        </section>
+        
+        <!-- <section> close ============================-->
+        <!-- ============================================-->
+  
+  
+      </main>
+      <!-- ===============================================-->
+      <!--    End of Main Content-->
+      <!-- ===============================================-->
+  
+  
+  
+  
+      <!-- ===============================================-->
+      <!--    JavaScripts-->
+      <!-- ===============================================-->
+      <script src="{% static 'vendors/@popperjs/popper.min.js' %}"></script>
+      <script src="{% static 'vendors/bootstrap/bootstrap.min.js' %}"></script>
+      <script src="{% static 'vendors/is/is.min.js' %}"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+      <script src="{% static 'vendors/fontawesome/all.min.js' %}"></script>
+      <script src="{% static 'assets/js/theme.js' %}"></script>
+  
+      <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    </body>
+  
+  
+  </html>

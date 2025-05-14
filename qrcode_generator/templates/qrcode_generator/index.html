@@ -1,0 +1,26 @@
+{% extends 'home.html' %} <!-- Étend le modèle de base 'home.html' -->
+
+{% block title %}WRX-Generator | QR Code{% endblock title %} <!-- Définit le titre de la page -->
+
+{% block content %} <!-- Début du bloc de contenu -->
+<body>
+    <section class="py-xxl-10 pb-10" id="home"> <!-- Section avec des classes de style et un ID -->
+        <h1>QR Code Generator</h1> <!-- Titre de la page -->
+        <form action="{% url 'qrcode_generator:generate_qr_code' %}" method="get"> <!-- Formulaire pour générer un QR code, envoie une requête GET à l'URL 'generate_qr_code' -->
+            <label class="col-form-label mt-4" for="url">Enter URL:</label><br> <!-- Label pour le champ de saisie de l'URL -->
+            <input class="form-control" type="text" id="url" name="url" required><br> <!-- Champ de saisie pour l'URL, obligatoire -->
+
+            <label class="col-form-label mt-4" for="style_option">Select QR Code Style:</label><br> <!-- Label pour le menu déroulant de style de QR code -->
+            <select class="form-select" id="style_option" name="style_option"> <!-- Menu déroulant pour sélectionner le style du QR code -->
+                <option value="black_on_white" selected>Black on White</option> <!-- Option pour un QR code noir sur fond blanc, sélectionnée par défaut -->
+                <option value="white_on_black">White on Black</option> <!-- Option pour un QR code blanc sur fond noir -->
+                <option value="black_transparent">Black without Background</option> <!-- Option pour un QR code noir sans fond -->
+                <option value="white_transparent">White without Background</option> <!-- Option pour un QR code blanc sans fond -->
+            </select><br> <!-- Fin du menu déroulant -->
+
+            <button class="btn btn-primary" type="submit">Generate QR Code</button> <!-- Bouton pour soumettre le formulaire et générer le QR code -->
+        </form>
+    </section>
+</body>
+{% endblock content %} <!-- Fin du bloc de contenu -->
+

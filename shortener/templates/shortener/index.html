@@ -1,0 +1,21 @@
+{% extends 'home.html' %} <!-- Étend le modèle de base 'home.html' -->
+
+{% block title %}WRX-Generator | Link Shortener{% endblock title %} <!-- Définit le titre de la page -->
+
+{% block content %} <!-- Début du bloc de contenu -->
+<section class="py-xxl-10 pb-10" id="home"> <!-- Section avec des classes de style et un ID -->
+    <h1>Link Shortener</h1> <!-- Titre de la page -->
+    <form method="post"> <!-- Formulaire pour soumettre l'URL à raccourcir, méthode POST -->
+        {% csrf_token %} <!-- Jeton CSRF pour la sécurité -->
+        <label class="col-form-label mt-4" for="original_url">Enter URL:</label><br> <!-- Label pour le champ de saisie de l'URL -->
+        <input class="form-control" type="text" id="original_url" name="original_url"><br> <!-- Champ de saisie pour l'URL -->
+        <button class="btn btn-primary" type="submit">Shorten URL</button> <!-- Bouton pour soumettre le formulaire -->
+    </form>
+    <div class="mt-5"> <!-- Division avec une marge supérieure -->
+    {% if short_url %} <!-- Vérifie si une URL courte a été générée -->
+        <p class="text-dark">Shortened URL: <a href="{{ short_url }}" class="text-dark">{{ short_url }}</a></p> <!-- Affiche l'URL courte -->
+    {% endif %} <!-- Fin de la condition -->
+    </div>
+</section>
+{% endblock content %} <!-- Fin du bloc de contenu -->
+

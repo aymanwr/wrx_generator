@@ -1,0 +1,49 @@
+<form id="subscription-form" class="row gx-2 gy-2 align-items-center" method="post" action="{% url 'newsletter_app:subscribe' %}">
+    {% csrf_token %}
+    <div class="col-12">
+        <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+    </div>
+    <div class="d-grid gap-3 col-sm-auto">
+        <button class="btn btn-danger" type="submit">Subscribe</button>
+    </div>
+</form>
+<div class="mt-3" id="subscription-messages"></div>
+
+<script>
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
+
+document.getElementById('subscription-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+    const xhr = new XMLHttpRequest();
+    xhr.open(form.method, form.action, true);
+    xhr.setRequestHeader('X-CSRFToken', csrftoken);
+    xhr.onload = function() {
+        const response = JSON.parse(xhr.responseText);
+        const messageDiv = document.getElementById('subscription-messages');
+        messageDiv.innerHTML = '';
+        const message = document.createElement('p');
+        message.className = response.status === 'success' ? 'alert alert-success' : 'alert alert-danger';
+        message.innerText = response.message;
+        messageDiv.appendChild(message);
+    };
+    xhr.send(formData);
+});
+</script>

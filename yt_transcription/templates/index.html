@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transcriber</title>
+</head>
+<body>
+    <h1>Transcriber</h1>
+    <h2>Upload a File</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ upload_form.as_p }}
+        <button type="submit" name="file_upload">Upload</button>
+    </form>
+    <h2>Transcribe YouTube Video</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ youtube_form.as_p }}
+        <button type="submit" name="youtube_link">Transcribe</button>
+    </form>
+</body>
+</html>

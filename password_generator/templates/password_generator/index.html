@@ -1,0 +1,158 @@
+{% extends 'home.html' %} <!-- Étend le modèle de base 'home.html' -->
+
+{% block title %}WRX-Generator | Password Generator{% endblock title %} <!-- Définit le titre de la page -->
+
+{% block content %} <!-- Début du bloc de contenu -->
+<section class="py-xxl-10 pb-10" id="home"> <!-- Section avec des classes de style et un ID -->
+<body onload="generateDefaultPassword()"> <!-- Corps de la page avec un événement onload pour générer un mot de passe par défaut -->
+    <h1>Random Password Generator</h1> <!-- Titre de la page -->
+    <label for="generatedPassword" class="form-label mt-4" >Generated Password:</label> <!-- Label pour le champ de mot de passe généré -->
+    <input type="text" id="generatedPassword" readonly class="form-control"> <!-- Champ de texte en lecture seule pour afficher le mot de passe généré -->
+    <span id="passwordStrength"></span> <!-- Élément pour afficher la force du mot de passe -->
+    <br><br> <!-- Sauts de ligne -->
+    <label for="length" class="form-label">Password Length:</label> <!-- Label pour le curseur de longueur du mot de passe -->
+    <span id="lengthValue">12</span> <!-- Affiche la valeur actuelle de la longueur du mot de passe -->
+    <input type="range" id="length" class="form-range" name="length" min="1" max="50" value="12" oninput="updateLengthValue()"> <!-- Curseur pour définir la longueur du mot de passe -->
+    <br> <!-- Saut de ligne -->
+    <input class="form-check-input" type="checkbox" id="uppercase" name="uppercase" checked> <!-- Case à cocher pour inclure des majuscules -->
+    <label class="form-check-label" for="uppercase">ABC</label> <!-- Label pour la case à cocher des majuscules -->
+    <input class="form-check-input" type="checkbox" id="lowercase" name="lowercase" checked> <!-- Case à cocher pour inclure des minuscules -->
+    <label class="form-check-label" for="lowercase">abc</label> <!-- Label pour la case à cocher des minuscules -->
+    <input class="form-check-input" type="checkbox" id="digits" name="digits" checked> <!-- Case à cocher pour inclure des chiffres -->
+    <label class="form-check-label" for="digits">123</label> <!-- Label pour la case à cocher des chiffres -->
+    <input class="form-check-input" type="checkbox" id="special_chars" name="special_chars" checked> <!-- Case à cocher pour inclure des caractères spéciaux -->
+    <label class="form-check-label" for="special_chars">#$&</label> <!-- Label pour la case à cocher des caractères spéciaux -->
+    <br><br> <!-- Sauts de ligne -->
+    <button type="button" onclick="generatePassword()" class="btn btn-primary">Generate New Password</button> <!-- Bouton pour générer un nouveau mot de passe -->
+    <button onclick="copyToClipboard()" type="button" class="btn btn-dark">Copy</button> <!-- Bouton pour copier le mot de passe généré -->
+    <span id="copiedText" class="valid-feedback" style="display: none;">Copied to Clipboard!</span> <!-- Message de confirmation de copie -->
+
+    <script>
+        // Fonction pour générer un mot de passe par défaut lors du chargement de la page
+        function generateDefaultPassword() {
+            var length = document.getElementById("length").value; // Récupère la longueur du mot de passe
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:,.<>?'; // Ensemble de caractères possibles
+            var password = ''; // Initialise le mot de passe
+            for (var i = 0; i < length; i++) { // Boucle pour générer chaque caractère du mot de passe
+                password += characters.charAt(Math.floor(Math.random() * characters.length)); // Ajoute un caractère aléatoire au mot de passe
+            }
+            document.getElementById("generatedPassword").value = password; // Affiche le mot de passe généré
+            updatePasswordStrength(password); // Met à jour la force du mot de passe
+        }
+
+        // Fonction pour générer un mot de passe basé sur les options sélectionnées
+        function generatePassword() {
+            var length = document.getElementById("length").value; // Récupère la longueur du mot de passe
+            var uppercase = document.getElementById("uppercase").checked; // Vérifie si les majuscules sont incluses
+            var lowercase = document.getElementById("lowercase").checked; // Vérifie si les minuscules sont incluses
+            var digits = document.getElementById("digits").checked; // Vérifie si les chiffres sont inclus
+            var special_chars = document.getElementById("special_chars").checked; // Vérifie si les caractères spéciaux sont inclus
+
+            // Vérifie si au moins une case est cochée
+            if (!uppercase && !lowercase && !digits && !special_chars) {
+                document.getElementById("uppercase").checked = true; // Coche au moins une case si aucune n'est cochée
+                return; // Retourne sans générer de mot de passe
+            }
+
+            var characters = ''; // Initialise l'ensemble de caractères possibles
+            if (uppercase) characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Ajoute les majuscules si sélectionnées
+            if (lowercase) characters += 'abcdefghijklmnopqrstuvwxyz'; // Ajoute les minuscules si sélectionnées
+            if (digits) characters += '0123456789'; // Ajoute les chiffres si sélectionnés
+            if (special_chars) characters += '!@#$%^&*()-_=+[]{}|;:,.<>?'; // Ajoute les caractères spéciaux si sélectionnés
+
+            var password = ''; // Initialise le mot de passe
+            for (var i = 0; i < length; i++) { // Boucle pour générer chaque caractère du mot de passe
+                password += characters.charAt(Math.floor(Math.random() * characters.length)); // Ajoute un caractère aléatoire au mot de passe
+            }
+            document.getElementById("generatedPassword").value = password; // Affiche le mot de passe généré
+            updatePasswordStrength(password); // Met à jour la force du mot de passe
+        }
+
+        // Fonction pour vérifier si au moins une case est cochée
+        function atLeastOneChecked() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]'); // Sélectionne toutes les cases à cocher
+            var checked = Array.prototype.slice.call(checkboxes).some(function(checkbox) { // Vérifie si au moins une case est cochée
+                return checkbox.checked;
+            });
+            return checked;
+        }
+
+        // Écouteur d'événement pour empêcher de décocher toutes les cases
+        document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                if (!atLeastOneChecked()) {
+                    this.checked = true;
+                }
+            });
+        });
+
+        // Fonction pour copier le mot de passe généré dans le presse-papiers
+        function copyToClipboard() {
+            var passwordElement = document.getElementById("generatedPassword");
+            passwordElement.select();
+            document.execCommand("copy");
+            document.getElementById("copiedText").style.display = "inline";
+            setTimeout(function() {
+                document.getElementById("copiedText").style.display = "none";
+            }, 1500); // Masquer après 1,5 secondes
+        }
+
+        // Fonction pour mettre à jour la valeur de la longueur du mot de passe affichée
+        function updateLengthValue() {
+            var length = document.getElementById("length").value;
+            document.getElementById("lengthValue").innerText = length;
+        }
+
+        // Fonction pour mettre à jour la force du mot de passe affichée
+        function updatePasswordStrength(password) {
+            var strengthText = document.getElementById("passwordStrength");
+            var strength = 0;
+
+            // Vérifie la longueur
+            if (password.length >= 8) {
+                strength++;
+            }
+            // Vérifie la présence de lettres majuscules et minuscules
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) {
+                strength++;
+            }
+            // Vérifie la présence de chiffres
+            if (/\d/.test(password)) {
+                strength++;
+            }
+            // Vérifie la présence de caractères spéciaux
+            if (/[^A-Za-z0-9]/.test(password)) {
+                strength++;
+            }
+
+            // Met à jour le texte de la force du mot de passe en fonction de la force calculée
+            switch (strength) {
+                case 0:
+                    strengthText.textContent = "Very Weak";
+                    strengthText.style.color = "red";
+                    break;
+                case 1:
+                    strengthText.textContent = "Weak";
+                    strengthText.style.color = "orange";
+                    break;
+                case 2:
+                    strengthText.textContent = "Moderate";
+                    strengthText.style.color = "blue";
+                    break;
+                case 3:
+                    strengthText.textContent = "Strong";
+                    strengthText.style.color = "green";
+                    break;
+                case 4:
+                    strengthText.textContent = "Very Strong";
+                    strengthText.style.color = "darkgreen";
+                    break;
+                default:
+                    strengthText.textContent = "";
+            }
+        }
+    </script>
+</body>
+</section>
+{% endblock %}
+</html>
