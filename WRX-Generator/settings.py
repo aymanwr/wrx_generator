@@ -29,13 +29,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h*q4fdh6dzp(2i(mx@ueo!l0b%&x@cr7!o2c^6mv_y(#ucn+!7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['9bcb-105-159-212-205.ngrok-free.app' ,'localhost' ,'127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://9bcb-105-159-212-205.ngrok-free.app']
+
 
 
 
@@ -142,9 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp-relay.brevo.com'
 EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '751741001@smtp-brevo.com'
-EMAIL_HOST_PASSWORD = 'xsmtpsib-bd23752014d59a51676d951f37c62a1fb68ddf669c952e9c908e12359ff92810-O3rz9CALTUd71yNZ'
+EMAIL_USE_TLS = TrueEMAIL_HOST_USER = '751741001@smtp-brevo.com'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
